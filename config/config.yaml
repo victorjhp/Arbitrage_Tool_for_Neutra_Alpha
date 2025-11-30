@@ -1,0 +1,265 @@
+############################################################
+# ARB BOT CONFIG - USD-anchored paths
+############################################################
+
+bot_mode:
+  dry_run: true
+
+############################################################
+# QUOTE CURRENCY MINIMUMS & SAFETY MULTIPLIER
+############################################################
+min_order:
+  quote_min_notional:
+    USD: 5.0
+    USDT: 5.0
+    USDC: 5.0
+    BTC: 0.0002
+
+  min_notional_multiplier: 0.01
+  first_leg_multiplier: 2.0
+
+############################################################
+# ASSET UNIVERSE & RISK TIERS
+############################################################
+assets:
+  USD:
+    role: "base_fiat"
+    enabled: false
+
+  BTC:
+    role: "bridge_major"
+    enabled: true
+
+  USDT:
+    role: "bridge_stable"
+    enabled: true
+
+  USDC:
+    role: "base_fiat"
+    enabled: true
+
+############################################################
+# TOKENS (COINS) — FULL ORIGINAL LIST
+############################################################
+tokens:
+  BTC:
+    tier: 1
+    enabled: true
+    allowed_as_bridge: true
+    allowed_as_terminal_asset: true
+    volatility_tier: 1
+    risk_level: "core_major"
+    max_position_fraction: 0.00
+
+  ETH:
+    tier: 1
+    enabled: true
+    allowed_as_bridge: true
+    allowed_as_terminal_asset: true
+    volatility_tier: 1
+    risk_level: "major"
+
+  SOL:
+    tier: 1
+    enabled: true
+    allowed_as_bridge: true
+    allowed_as_terminal_asset: true
+    volatility_tier: 2
+    risk_level: "major"
+
+  XRP:
+    tier: 1
+    enabled: true
+    allowed_as_bridge: true
+    allowed_as_terminal_asset: true
+    volatility_tier: 2
+    risk_level: "major_alt"
+
+  DOGE:
+    tier: 1
+    enabled: true
+    allowed_as_bridge: true
+    allowed_as_terminal_asset: true
+    volatility_tier: 3
+    risk_level: "high_beta_major"
+
+  TRX:
+    tier: 1
+    enabled: true
+    allowed_as_bridge: true
+    allowed_as_terminal_asset: true
+    volatility_tier: 2
+    risk_level: "major_alt"
+
+  SUI:
+    tier: 2
+    enabled: true
+    allowed_as_bridge: true
+    allowed_as_terminal_asset: true
+    volatility_tier: 3
+    risk_level: "mid_cap"
+
+  WLD:
+    tier: 2
+    enabled: true
+    allowed_as_bridge: true
+    allowed_as_terminal_asset: true
+    volatility_tier: 3
+    risk_level: "mid_cap"
+
+  USDC:
+    tier: 1
+    enabled: true
+    allowed_as_bridge: true
+    allowed_as_terminal_asset: true
+    volatility_tier: 1
+    risk_level: "stablecoin_like"
+
+  BNB:
+    tier: 2
+    enabled: true
+    allowed_as_bridge: true
+    allowed_as_terminal_asset: true
+    volatility_tier: 2
+    risk_level: "mid_cap_major"
+
+  WITCH:
+    tier: 3
+    enabled: true
+    allowed_as_bridge: false
+    allowed_as_terminal_asset: true
+    volatility_tier: 4
+    risk_level: "high"
+    extra_edge_required: 0.005
+
+  DICE:
+    tier: 3
+    enabled: true
+    allowed_as_bridge: false
+    allowed_as_terminal_asset: true
+    volatility_tier: 4
+    risk_level: "high"
+    extra_edge_required: 0.005
+
+  TALK:
+    tier: 3
+    enabled: true
+    allowed_as_bridge: false
+    allowed_as_terminal_asset: true
+    volatility_tier: 4
+    risk_level: "high"
+    extra_edge_required: 0.005
+
+  KAIA:
+    tier: 3
+    enabled: true
+    allowed_as_bridge: false
+    allowed_as_terminal_asset: true
+    volatility_tier: 3
+    risk_level: "medium_high"
+
+  ENS:
+    tier: 3
+    enabled: true
+    allowed_as_bridge: false
+    allowed_as_terminal_asset: true
+    volatility_tier: 3
+    risk_level: "medium_high"
+
+  HVH:
+    tier: 3
+    enabled: true
+    allowed_as_bridge: false
+    allowed_as_terminal_asset: true
+    volatility_tier: 4
+    risk_level: "high"
+
+  CSPR:
+    tier: 3
+    enabled: true
+    allowed_as_bridge: false
+    allowed_as_terminal_asset: true
+    volatility_tier: 4
+    risk_level: "high"
+
+  AHT:
+    tier: 3
+    enabled: true
+    allowed_as_bridge: false
+    allowed_as_terminal_asset: true
+    volatility_tier: 4
+    risk_level: "high"
+
+  PEPE:
+    tier: 3
+    enabled: true
+    allowed_as_bridge: false
+    allowed_as_terminal_asset: true
+    volatility_tier: 5
+    risk_level: "meme_extreme"
+    extra_edge_required: 0.01
+
+############################################################
+# PATH GENERATION & SELECTION
+############################################################
+paths:
+  min_length: 2
+  max_length: 4
+  allow_revisit_nodes: false
+  extra_leg_min_edge_improvement: 0.000000002
+
+############################################################
+# RISK MODEL
+############################################################
+risk_model:
+  volatility_window_seconds: 60
+  volatility_sampling_interval_seconds: 1
+  vol_risk_multiplier: 0.5
+  slippage_top_levels: 3
+  slippage_coefficient: 0.00001
+  min_profit_margin: 0.0000000003
+
+############################################################
+# LATENCY / TURNAROUND
+############################################################
+latency_model:
+  rolling_samples: 30
+  spike_std_multiplier: 3.0
+  default_leg_time_seconds: 0.2
+
+############################################################
+# TRADE SIZING (EXTENDED)
+############################################################
+trade_sizing:
+  starting_size_fractions: [0.50, 0.70, 0.90]
+  reference_equity_usd: 2000
+  max_fraction_of_equity_per_path: 0.90
+  max_usd_per_trade: 1000
+  max_usdt_per_trade: 1000
+  max_btc_per_trade: 0.01
+
+############################################################
+# EXECUTION & FAILSAFES
+############################################################
+execution:
+  inter_leg_timeout_seconds: 1.0
+  max_concurrent_paths: 1
+  fail_strategy: "panic_sell"
+
+failsafes:
+  stop_on_inconsistent_balance: true
+  max_daily_loss_fraction: 0.03
+  max_api_error_rate: 0.05
+  pause_after_rate_limit_seconds: 10
+
+############################################################
+# LOGGING
+############################################################
+logging:
+  log_trades: true
+  log_paths: false
+  log_risk_calcs: true
+  print_dry_run_actions: true
+  log_profitable_trades: true
+  heartbeat_enabled: true
+  debug_mode: true

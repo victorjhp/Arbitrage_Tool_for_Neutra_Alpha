@@ -1,0 +1,6 @@
+__pycache__/
+.venv/
+.idea/
+credentials.toml
+config/secrets.yaml
+secrets.yaml
